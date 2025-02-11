@@ -61,7 +61,8 @@ Reactのプロジェクトを作成するには、以下の手順を実行しま
    ```bash
    npm init react-app my-app
    ```
-   なお次のコマンドは非推奨となっている。(npm initの方がいいらしい)
+
+   【注記】「npx create-react-app」のコマンドは非推奨となっている。(npm initの方がよいとのこと)  
    ~~npx create-react-app my-react-app~~
 
    `my-react-app`の部分は、プロジェクトの名前に置き換えてください。
