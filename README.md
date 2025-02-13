@@ -232,37 +232,196 @@ export default App;
 
 必要に応じて、さらに詳しい説明やコード例を提供できます！
 
-### GitHubリポジトリを悪意ある破壊者から守るための設定について
+### ReactでBootstrapを使う方法
+---
+Reactで`bootstrap`のみをインストールして使用する場合、`react-bootstrap`は使わず、BootstrapのCSSと必要なJavaScriptを適切に読み込む必要があります。以下の手順で進めます。
+
 ---
 
-### 手順1: 現在のブランチ保護ルールを確認する
-1. **有効になっているブランチ保護ルールを確認する:**
-   - GitHub上のリポジトリに移動します。
-   - **Settings（設定）** > **Branches（ブランチ）** に移動します。
-   - デフォルトブランチに適用されている保護ルールを確認します。
+## 1. Bootstrapをインストール
+ターミナルで以下のコマンドを実行して、Bootstrapをインストールします。
 
-2. **「Require pull request reviews before merging」設定が有効かどうか確認する:**
-   - この設定がチェックされていることを確認します。この設定は、プルリクエストがマージされる前にレビューが必要であることを要求します。
+```sh
+npm install bootstrap
+```
 
-3. **「Require review from Code Owners」設定が有効かどうか確認する:**
-   - この設定がチェックされていることを確認します。この設定は、プルリクエストがマージされる前にコードオーナーからの承認が必要であることを要求します。
+---
 
-### 手順2: ブランチ保護ルールを変更する
-1. **リポジトリ管理者がプルリクエストレビューの必要要件を無視できるように保護ルールを調整する:**
-   - ブランチ保護ルールで、リポジトリ管理者がルールを無視できるようにする **「Include administrators（管理者を含める）」** オプションを有効にします。これにより、管理者が自分のプルリクエストを承認してマージできるようになります。  
-【注記】これは「Bypass list」に「Repository adminRole」を追加する操作を指すと見られる。
+## 2. BootstrapのCSSを読み込む
+BootstrapのCSSをReactアプリに適用する方法はいくつかありますが、`index.js`または`App.js`で`import`するのが一般的です。
 
-2. **自分がコードオーナーであり、自分のプルリクエストを承認できない場合は「Require review from Code Owners」設定を無効にする:**
-   - **「Require review from Code Owners（コードオーナーからのレビューを要求する）」** オプションのチェックを外します。これにより、コードオーナーである場合でも自分のプルリクエストを承認してマージできるようになります。
+### `index.js`（または `src/main.js`）
+```javascript
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // JavaScript機能（モーダル、トーストなど）を使用する場合
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-3. **特定のブランチに対してプルリクエストのマージを容易にするため、新しいブランチ保護ルールを作成する（オプション）:**
-   - レビューの要件が少ない特定のブランチに対して新しいブランチ保護ルールを作成します。これにより、ブランチ管理においてより柔軟性が得られます。
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
 
-### フォローアップ手順
-- ブランチ保護ルールの変更が問題を解決するかどうかを確認します。
-- ブランチ保護ルールを変更した手順とその理由を文書化し、リポジトリの透明性と責任を維持します。
+---
 
-これらの手順を実行することで、ブランチ保護設定により自分のプルリクエストを承認およびマージできない問題を解決できるはずです。
+## 3. Bootstrapのコンポーネントを使用する
+Bootstrapのクラス名を使って、コンポーネントを作成できます。
+
+### 例: ボタンとカードを使う
+```javascript
+import React from 'react';
+
+function App() {
+  return (
+    <div className="container mt-4">
+      <h1 className="text-primary">Bootstrap in React</h1>
+      <button className="btn btn-success">クリック</button>
+
+      <div className="card mt-4">
+        <div className="card-body">
+          <h5 className="card-title">カードタイトル</h5>
+          <p className="card-text">これはBootstrapのカードコンポーネントです。</p>
+          <a href="#" className="btn btn-primary">詳細を見る</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+## 4. BootstrapのJavaScriptを使用する場合
+BootstrapのJavaScript機能（モーダル、ドロップダウン、ツールチップなど）を使う場合、`bootstrap.bundle.min.js`を読み込む必要があります。
+
+### 例: モーダルを使う
+```javascript
+import React, { useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+function App() {
+  useEffect(() => {
+    // JavaScriptによる動作が必要な場合はuseEffectを使用
+    const modal = new window.bootstrap.Modal(document.getElementById('exampleModal'));
+  }, []);
+
+  return (
+    <div className="container mt-4">
+      <h1>Bootstrap Modal in React</h1>
+      <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        モーダルを開く
+      </button>
+
+      {/* モーダル */}
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">モーダルタイトル</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+            </div>
+            <div className="modal-body">
+              これはBootstrapのモーダルです。
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+## 5. カスタムCSSを追加する
+Bootstrapのデザインをカスタマイズしたい場合は、独自のCSSを追加できます。
+
+### 例: `index.css`にカスタムスタイルを追加
+```css
+.custom-button {
+  background-color: #ff5722;
+  color: white;
+}
+```
+
+### 使い方:
+```javascript
+<button className="btn custom-button">カスタムボタン</button>
+```
+
+---
+
+## まとめ
+- `npm install bootstrap` でインストール
+- `index.js` で `bootstrap/dist/css/bootstrap.min.css` をインポート
+- Bootstrapのクラスを使ってコンポーネントをデザイン
+- JavaScript機能を使う場合は `bootstrap.bundle.min.js` をインポート
+- `data-bs-*` 属性を使ってモーダルなどを動かせる
+- カスタムCSSを追加してデザインを変更可能
+
+これで、ReactアプリでBootstrapを直接利用できます！
+
+### Bootstrapを使った、レスポンシブコードのサンプル
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Bootstrap Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Brand</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1>Welcome to the Responsive Page</h1>
+    <p>This is a sample page using Bootstrap.</p>
+  </div>
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 
 ### Reactプロジェクト作成で依存関係エラーが出る場合の対処方法
 ---
@@ -382,6 +541,38 @@ npm uninstall -g <モジュール名>
 ```sh
 npm ls -g --depth=0 --parseable | grep node_modules/ | xargs npm uninstall -g
 ```
+
+### GitHubリポジトリを悪意ある破壊者から守るための設定について
+---
+
+### 手順1: 現在のブランチ保護ルールを確認する
+1. **有効になっているブランチ保護ルールを確認する:**
+   - GitHub上のリポジトリに移動します。
+   - **Settings（設定）** > **Branches（ブランチ）** に移動します。
+   - デフォルトブランチに適用されている保護ルールを確認します。
+
+2. **「Require pull request reviews before merging」設定が有効かどうか確認する:**
+   - この設定がチェックされていることを確認します。この設定は、プルリクエストがマージされる前にレビューが必要であることを要求します。
+
+3. **「Require review from Code Owners」設定が有効かどうか確認する:**
+   - この設定がチェックされていることを確認します。この設定は、プルリクエストがマージされる前にコードオーナーからの承認が必要であることを要求します。
+
+### 手順2: ブランチ保護ルールを変更する
+1. **リポジトリ管理者がプルリクエストレビューの必要要件を無視できるように保護ルールを調整する:**
+   - ブランチ保護ルールで、リポジトリ管理者がルールを無視できるようにする **「Include administrators（管理者を含める）」** オプションを有効にします。これにより、管理者が自分のプルリクエストを承認してマージできるようになります。  
+【注記】これは「Bypass list」に「Repository adminRole」を追加する操作を指すと見られる。
+
+2. **自分がコードオーナーであり、自分のプルリクエストを承認できない場合は「Require review from Code Owners」設定を無効にする:**
+   - **「Require review from Code Owners（コードオーナーからのレビューを要求する）」** オプションのチェックを外します。これにより、コードオーナーである場合でも自分のプルリクエストを承認してマージできるようになります。
+
+3. **特定のブランチに対してプルリクエストのマージを容易にするため、新しいブランチ保護ルールを作成する（オプション）:**
+   - レビューの要件が少ない特定のブランチに対して新しいブランチ保護ルールを作成します。これにより、ブランチ管理においてより柔軟性が得られます。
+
+### フォローアップ手順
+- ブランチ保護ルールの変更が問題を解決するかどうかを確認します。
+- ブランチ保護ルールを変更した手順とその理由を文書化し、リポジトリの透明性と責任を維持します。
+
+これらの手順を実行することで、ブランチ保護設定により自分のプルリクエストを承認およびマージできない問題を解決できるはずです。
 
 ---
 # 以下は最初から本資料(README.md)あった記述
