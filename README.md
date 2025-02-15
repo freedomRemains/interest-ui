@@ -1,4 +1,6 @@
 ### 2025/02/11に起きたReactプロジェクト作成エラーを解決する記事(GitHub)
+---
+
 [手作業でいくつかのコマンドを実行する](https://github.com/facebook/create-react-app/issues/13873#issuecomment-2611236376)
 
 ```bash
@@ -21,7 +23,9 @@ npm install web-vitals
 npm start
 ```
 
+---
 ### Reactプロジェクトの作り方について、GitHub Copilotの補足
+---
 `create-react-app` コマンドは以前は React プロジェクトを作成するための一般的な方法でしたが、現在では `npm init` コマンドを使用する方が推奨されています。以下のコマンドを使用して最新の方法で React プロジェクトを作成できます。
 
 ```bash
@@ -42,6 +46,7 @@ npx clear-npx-cache
 
 `npm init react-app` コマンドが推奨されていますが、 `npx create-react-app` も現在でも使用可能です。どちらの方法でも最新の React プロジェクトを作成できます。
 
+---
 ### Reactプロジェクトの作り方
 ---
 
@@ -134,8 +139,10 @@ export default App;
 
 以上で、基本的なReactプロジェクトの作成方法と動作サンプルの紹介は終了です。質問があればお気軽にどうぞ！
 
+---
 ### Reactプロジェクトへの新規ページの追加方法
 ---
+
 `create-react-app`で作成したReactプロジェクトに新しいページを追加するには、以下の手順で進めます。React Routerを使用してページ遷移を実現するのが一般的です。
 
 ### 手順
@@ -232,8 +239,10 @@ export default App;
 
 必要に応じて、さらに詳しい説明やコード例を提供できます！
 
+---
 ### ReactでBootstrapを使う方法
 ---
+
 Reactで`bootstrap`のみをインストールして使用する場合、`react-bootstrap`は使わず、BootstrapのCSSと必要なJavaScriptを適切に読み込む必要があります。以下の手順で進めます。
 
 ---
@@ -373,6 +382,7 @@ Bootstrapのデザインをカスタマイズしたい場合は、独自のCSS�
 
 これで、ReactアプリでBootstrapを直接利用できます！
 
+---
 ### Bootstrapを使った、レスポンシブコードのサンプル
 ---
 
@@ -423,6 +433,213 @@ Bootstrapのデザインをカスタマイズしたい場合は、独自のCSS�
 </body>
 </html>
 
+---
+### Bootstrapを使ったレスポンシブなHTMLの書き方
+---
+
+BootStrapを使ったレスポンシブなHTMLのサンプルを提示します。  
+このコードは、**FullHDのノートパソコン（1920x1080）**と**スマホ（幅360px～480pxを想定）**の両方で適切に表示されるように設計されています。  
+
+- **PC向け（FullHD）**: 横並びの3カラムレイアウト  
+- **スマホ向け**: 1カラムレイアウト（縦並び）  
+- **ナビゲーションバー**は、スマホ時に折りたたみ可能  
+
+---
+
+### ✅ コードサンプル
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>レスポンシブサンプル</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .custom-container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MySite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">ホーム</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">サービス</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <div class="container custom-container">
+        <div class="row">
+            <div class="col-md-4 col-12">
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="画像1">
+                    <div class="card-body">
+                        <h5 class="card-title">タイトル1</h5>
+                        <p class="card-text">説明文が入ります。</p>
+                        <a href="#" class="btn btn-primary">詳しく見る</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="画像2">
+                    <div class="card-body">
+                        <h5 class="card-title">タイトル2</h5>
+                        <p class="card-text">説明文が入ります。</p>
+                        <a href="#" class="btn btn-primary">詳しく見る</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="画像3">
+                    <div class="card-body">
+                        <h5 class="card-title">タイトル3</h5>
+                        <p class="card-text">説明文が入ります。</p>
+                        <a href="#" class="btn btn-primary">詳しく見る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+```
+
+---
+
+### 🛠 特徴
+1. **ナビゲーションバー**
+   - スマホでは折りたたみ可能（ハンバーガーメニュー）
+   - PCでは横にメニュー表示
+
+2. **レスポンシブなカラム**
+   - **PC**: 3カラム表示（`col-md-4`）
+   - **スマホ**: 1カラム表示（`col-12`）
+
+3. **カードレイアウト**
+   - 画像 + タイトル + テキスト + ボタンを配置
+
+---
+
+### 📱 表示例
+#### **PC（1920x1080）**
+| [画像1] [画像2] [画像3] |
+|------------------------|
+| カード1 カード2 カード3 |
+
+#### **スマホ（360px～480px）**
+| [画像1] |
+|---------|
+| カード1 |
+
+| [画像2] |
+|---------|
+| カード2 |
+
+| [画像3] |
+|---------|
+| カード3 |
+
+---
+
+**このコードをそのままコピーして実行すれば、レスポンシブ対応のページが動作します！**  
+さらにカスタマイズしたい部分があれば教えてください。 🚀
+
+---
+### ReactでBootstrapを使うサンプル。
+---
+
+ReactでBootstrapを使う方法はいくつかありますが、一般的なのは以下の2つです。  
+
+1. **BootstrapのCSSだけを使う方法**（シンプルな方法）  
+2. **React向けのBootstrapコンポーネントライブラリ（React Bootstrap）を使う方法**  
+
+---
+
+### **1. BootstrapのCSSだけを使う方法（シンプル）**
+まず、BootstrapのCSSをインストールします。  
+```bash
+npm install bootstrap
+```
+またはCDNを使う場合は、`index.html` に以下を追加：
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+/>
+```
+
+ReactコンポーネントでBootstrapのクラスを使う：
+```jsx
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function App() {
+  return (
+    <div className="container mt-5">
+      <h1 className="text-primary">Hello, Bootstrap in React!</h1>
+      <button className="btn btn-success">Click Me</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+### **2. React Bootstrapを使う方法（公式コンポーネント）**
+BootstrapをReactコンポーネントとして扱える **React Bootstrap** を使う方法もあります。
+
+まず、パッケージをインストール：
+```bash
+npm install react-bootstrap bootstrap
+```
+
+コンポーネントで使う：
+```jsx
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Container } from "react-bootstrap";
+
+function App() {
+  return (
+    <Container className="mt-5">
+      <h1 className="text-primary">Hello, React Bootstrap!</h1>
+      <Button variant="success">Click Me</Button>
+    </Container>
+  );
+}
+
+export default App;
+```
+
+**React Bootstrap のメリット**：
+- クラス名を覚えなくてもコンポーネント化されていて使いやすい  
+- JavaScriptで動くコンポーネント（モーダル、アコーディオンなど）も簡単に実装可能  
+
+---
+
+どちらの方法も便利ですが、**CSSだけを使う方法はシンプルで軽量**、**React Bootstrapを使う方法はコンポーネント指向で便利** なので、用途に応じて選ぶといいですね！ 🚀
+
+---
 ### Reactプロジェクト作成で依存関係エラーが出る場合の対処方法
 ---
 
