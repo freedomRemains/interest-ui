@@ -1,7 +1,12 @@
 ## プロジェクト構築準備作業
 本プロジェクト構築に当たって、AIに質問した内容をまとめた資料です。
 
+[READMEに戻る](../README.md)
+
 ---
+
+### coding-rule
+
 ### 【AIへの質問】Next.js(React)で推奨されているコーディング規約を教えてください。
 ### 【AIからの回答】
 
@@ -119,6 +124,9 @@ Next.jsでは、**JestやReact Testing Libraryを活用してテストを行う*
 他にも気になることがあれば、遠慮なく聞いてくださいね。
 
 ---
+
+### naming-rule
+
 ### 【AIへの質問】Next.js(React)で推奨されているファイル名の命名規則を教えてください。
 ### 【AIからの回答】
 
@@ -168,3 +176,7 @@ Next.js（React）では、ファイル名の命名規則を統一すること�
 
 Next.jsの公式ドキュメントにも詳細なファイル命名規則が記載されていますので、[こちら](https://nextjs.org/docs/app/api-reference/file-conventions)を参考にすると良いでしょう！  
 他にも気になることがあれば、遠慮なく聞いてくださいね。
+
+---
+
+[READMEに戻る](../README.md)
