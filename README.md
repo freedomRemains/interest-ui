@@ -9,9 +9,9 @@
 ただし別のmdファイルからこのファイルの一部記述への参照依頼が書かれていることがあります。  
 その場合はこのファイルの内容を適宜確認してください。
 
-- [プロジェクト構築準備作業](md/10_prepare.md)
+- [プロジェクト構築準備作業](https://github.com/freedomRemains/interest-ui/blob/feature/3/md/00001_prepare.md)
 
 ---
 本プロジェクトの規則は、次の通りです。
 
-- [AIに守ってほしい規則です](md/20_required_rule.md)
+- [AIに守ってほしい規則です](https://github.com/freedomRemains/interest-ui/blob/feature/3/md/00002_required_rule.md)
