@@ -1,6 +1,6 @@
-# interest-ui
+### create-next-js-project
 
-Next.jsで「interest-ui」という親ディレクトリ名のフロントエンドプロジェクトを構築する件、構成や内容について少し確認させてください。成果物をzipファイルとして提供することはできませんが、代わりにプロジェクトの構成とコードを丁寧にご案内しますので、すぐにご自身の環境でセットアップできるようにします。
+### Next.jsのプロジェクトを作成する方法
 
 以下は基本的な構成と初期コードです：
 
@@ -95,11 +95,80 @@ http://localhost:3000 にアクセスすると、Interest UIのトップペー�
 
 ---
 
-もしこのプロジェクトに特定の機能（API連携、認証、UIライブラリなど）を追加したい場合は、ぜひ教えてください。目的に合わせて構成を拡張できますよ。たとえば：
+### create-auto-test
 
-- 🌿 Tailwind CSSでスタイリング
-- 🔐 Auth.jsやNextAuthでログイン機能
-- 📦 ZustandやReduxで状態管理
-- 📊 Chart.jsでデータ可視化
+### 自動テストの追加方法
+Next.js環境に自動テストを導入するには、まずユニットテストとコンポーネントテストの基盤を整えるのが一般的です。Next.js公式でも推奨されているのは **Jest + React Testing Library** の組み合わせです。以下に導入手順をまとめました。
 
-どんなUIを目指しているか、もう少し教えていただければ、さらに最適な設計をご提案できます。
+---
+
+## 🧪 Next.jsに自動テスト環境を導入する手順（Jest + Testing Library）
+
+### ① 必要なパッケージのインストール
+```bash
+npm install -D jest jest-environment-jsdom @types/jest ts-jest ts-node
+npm install -D @testing-library/react @testing-library/dom @testing-library/jest-dom @testing-library/user-event
+```
+
+### ② Jestの初期設定
+```bash
+npm init jest@latest
+```
+プロンプトに従って設定します：
+- TypeScriptを使う → Yes
+- テスト環境 → jsdom（ブラウザライク）
+- カバレッジレポート → Yes
+- カバレッジプロバイダー → v8
+- モックの自動クリア → Yes
+
+### ③ `jest.config.ts` の設定（Next.js向け）
+```ts
+import nextJest from 'next/jest'
+import type { Config } from 'jest'
+
+const createJestConfig = nextJest({ dir: './' })
+
+const config: Config = {
+  testEnvironment: 'jsdom',
+  coverageProvider: 'v8',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+}
+
+export default createJestConfig(config)
+```
+
+### ④ `jest.setup.ts` の作成（マッチャー拡張）
+```ts
+import '@testing-library/jest-dom'
+```
+
+### ⑤ テストファイルの作成
+Next.jsでは `__tests__` ディレクトリや `.test.tsx` / `.spec.tsx` ファイルを使うのが一般的です。
+
+例：`__tests__/Home.test.tsx`
+```tsx
+import { render, screen } from '@testing-library/react'
+import Home from '../pages/index'
+
+describe('Home Page', () => {
+  it('renders heading', () => {
+    render(<Home />)
+    expect(screen.getByRole('heading', { name: /welcome/i })).toBeInTheDocument()
+  })
+})
+```
+
+### ⑥ テストの実行
+```bash
+npm test
+```
+
+---
+
+## ✅ 補足：E2Eテストも視野に入れるなら
+- **Playwright** や **Cypress** が人気です。
+- Jestはユニット・結合テスト向き、PlaywrightはE2Eテスト向きです。
+
+---
+
+この構成なら、CI/CDにもスムーズに組み込めます。次のステップとして、GitHub Actionsで自動テストを走らせる設定もご提案できますよ。興味ありますか？
