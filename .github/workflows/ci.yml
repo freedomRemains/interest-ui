@@ -1,0 +1,57 @@
+# CI/CD設定(nameは表題やコメントのようなもので、必須ではない)
+name: CI
+
+# このGitHubActionsは、次のタイミングで起動する
+on:
+
+  # developブランチへのpush時
+  push:
+    branches: [ develop ]
+
+  # developブランチへのプルリクエスト作成時
+  pull_request:
+    branches: [ develop ]
+
+# ジョブ(ワークフロー内で実行する作業のまとまり)の定義
+jobs:
+
+  # ビルド及びテストの設定(build-and-testはjobs配下のジョブ名に該当する、任意の文字列としてよい)
+  build-and-test:
+
+    # 当該ジョブの実行環境はUbuntuの最新イメージ上とする
+    runs-on: ubuntu-latest
+
+    # ジョブ内ステップの定義
+    steps:
+
+      # ソースコードを取得する
+      - name: Checkout repository
+
+        # GitHubActionsが用意しているcheckoutの仕組みで資材を取得する
+        uses: actions/checkout@v4
+
+      # Node.jsのセットアップを行う
+      - name: Set up Node.js
+
+        # GitHubActionsが用意しているNode.jsセットアップの仕組みを利用する
+        uses: actions/setup-node@v4
+
+        # Node.jsのバージョンは22を利用する
+        with:
+          node-version: '22'
+
+      # 依存関係のインストールを行う
+      - name: Install dependencies
+        run: npm ci
+
+      # lintを実行する
+      - name: Run lint
+        run: npm run lint
+
+      # 全テストを実行する
+      - name: Run tests
+        run: npm run test
+
+      # カバレッジを測定する
+      - name: Run coverage
+        run: npm run test:coverage
