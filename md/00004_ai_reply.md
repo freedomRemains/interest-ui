@@ -1,5 +1,17 @@
 ### create-next-js-project
 
+[READMEに戻る](../README.md)
+
+---
+
+- カバレッジの測定
+
+```Next.js
+npm run test:coverage
+```
+
+---
+
 ### Next.jsのプロジェクトを作成する方法
 
 以下は基本的な構成と初期コードです：
@@ -172,3 +184,14 @@ npm test
 ---
 
 この構成なら、CI/CDにもスムーズに組み込めます。次のステップとして、GitHub Actionsで自動テストを走らせる設定もご提案できますよ。興味ありますか？
+
+---
+
+### 以下、AI回答補足
+- 更にAIに質問し、カバレッジ測定の設定を「package.json」に追加している。
+  - 「"test:coverage": "jest --coverage"」という設定。
+  - 「npm run test:coverage」コマンドで起動できる。
+
+---
+
+[READMEに戻る](../README.md)
